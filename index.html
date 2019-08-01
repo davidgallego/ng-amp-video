@@ -65,14 +65,12 @@
           firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         });
       };
-      var playerUrl = decodeURIComponent(getParameterByName('scriptSrc'));
-      var scriptLoaded = loadScriptAsync(
-        playerUrl
-      );
+      var playerUrl = decodeURIComponent(getParameterByName("scriptSrc"));
+      var scriptLoaded = loadScriptAsync(playerUrl);
 
       document.addEventListener("DOMContentLoaded", function() {
         scriptLoaded.then(function() {
-          const image = decodeURIComponent(getParameterByName("image")();
+          const image = decodeURIComponent(getParameterByName("image"));
           const tag = getParameterByName("tag");
           const guid = getParameterByName("guid");
           const channel = getParameterByName("channel");
