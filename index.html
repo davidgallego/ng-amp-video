@@ -65,12 +65,13 @@
           firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         });
       };
-      var playerUrl = decodeURIComponent(getParameterByName("scriptSrc"));
+      var playerUrl = getParameterByName("scriptScr");
+      console.log(playerUrl);
       var scriptLoaded = loadScriptAsync(playerUrl);
 
       document.addEventListener("DOMContentLoaded", function() {
         scriptLoaded.then(function() {
-          const image = decodeURIComponent(getParameterByName("image"));
+          const image = getParameterByName("image");
           const tag = getParameterByName("tag");
           const guid = getParameterByName("guid");
           const channel = getParameterByName("channel");
@@ -91,6 +92,7 @@
             showTitle: showTitle,
             video_publicationDate: publicationDate
           };
+          console.log(playerOptions);
           const player = new window.SDK(
             `#article-hero-player_1`,
             playerOptions,
