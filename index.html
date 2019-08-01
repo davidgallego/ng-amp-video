@@ -31,10 +31,6 @@
       type="text/javascript"
       src="//mssl.fwmrm.net/libs/adm/6.26.0/AdManager.js"
     ></script>
-    <script
-      type="text/javascript"
-      src="https://player-staging.fichub.com/sdk/ngpgs/sdk.js"
-    ></script>
   </head>
 
   <body>
@@ -69,26 +65,27 @@
           firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         });
       };
-      // var playerUrl = getParameterByName('playerUrl');
+      var playerUrl = decodeURIComponent(getParameterByName('scriptSrc'));
       var scriptLoaded = loadScriptAsync(
-        "https://player-staging.fichub.com/sdk/ngpgs/sdk.js"
+        playerUrl
       );
 
       document.addEventListener("DOMContentLoaded", function() {
         scriptLoaded.then(function() {
-          const image = getParameterByName("image");
+          const image = decodeURIComponent(getParameterByName("image")();
           const tag = getParameterByName("tag");
           const guid = getParameterByName("guid");
           const channel = getParameterByName("channel");
           const showRating = getParameterByName("showRating");
           const showTitle = getParameterByName("showTitle");
           const publicationDate = getParameterByName("publicationDate");
-          const template = getParameterByName("template");
+          const site_section_id = getParameterByName("site_section_id");
+          const country = getParameterByName("country");
           const playerOptions = {
             template: "ngpgs-iframe/default",
-            country: "ES",
-            site_section_id: "www.cms-stage-es.ngeo.es",
-            autoplay: "true",
+            country: country,
+            site_section_id: site_section_id,
+            autoplay: "false",
             id: guid,
             video_category: tag,
             channel: channel,
@@ -96,7 +93,6 @@
             showTitle: showTitle,
             video_publicationDate: publicationDate
           };
-          console.log(playerOptions);
           const player = new window.SDK(
             `#article-hero-player_1`,
             playerOptions,
@@ -105,15 +101,6 @@
           player.init(function(encodedData, container, response) {
             $(container).html(response.payload);
           });
-          console.log(
-            image,
-            tag,
-            guid,
-            channel,
-            showRating,
-            showTitle,
-            publicationDate
-          );
         });
       });
     </script>
