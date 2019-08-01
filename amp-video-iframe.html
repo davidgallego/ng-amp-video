@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charSet="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="google-site-verification"
+      content="m9UsgT9JOH5f9ZsrAAvg7d-7IOoVmIIWUJi6f9U_h1c"
+    />
+    <script>
+      var NGS = window.NGS || {};
+      NGS.modules = {
+        video: {
+          pageConfig: {
+            autoload: "false",
+            preferredFormats: "MPEG4,F4M,FLV,M3U",
+            preferredRuntimes: "Universal",
+            layoutOptions: {
+              tpShareFNG: false
+            }
+          }
+        }
+      };
+    </script>
+    <script src="/legacy/jquery-3.2.1.min.js"></script>
+    <script
+      type="text/javascript"
+      src="//mssl.fwmrm.net/libs/adm/6.26.0/AdManager.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://player-staging.fichub.com/sdk/ngpgs/sdk.js"
+    ></script>
+  </head>
+
+  <body>
+    <div id="article-hero-player_1" style="height:262px;"></div>
+    <script>
+      function getParameterByName(name, url) {
+        let thisUrl = url;
+        let thisName = name;
+        if (!thisUrl) {
+          thisUrl = document.location.href;
+        }
+        thisName = name.replace(/[[]]/g, "\\$&");
+        const regex = new RegExp(`[?&]${thisName}(=([^&#]*)|&|#|$)`);
+        const results = regex.exec(thisUrl);
+        if (!results) {
+          return null;
+        }
+        if (!results[2]) {
+          return "";
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+      var loadScriptAsync = function(uri) {
+        return new Promise((resolve, reject) => {
+          var tag = document.createElement("script");
+          tag.src = uri;
+          tag.async = true;
+          tag.onload = () => {
+            resolve();
+          };
+          var firstScriptTag = document.getElementsByTagName("script")[0];
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        });
+      };
+      // var playerUrl = getParameterByName('playerUrl');
+      var scriptLoaded = loadScriptAsync(
+        "https://player-staging.fichub.com/sdk/ngpgs/sdk.js"
+      );
+
+      document.addEventListener("DOMContentLoaded", function() {
+        scriptLoaded.then(function() {
+          const image = getParameterByName("image");
+          const tag = getParameterByName("tag");
+          const guid = getParameterByName("guid");
+          const channel = getParameterByName("channel");
+          const showRating = getParameterByName("showRating");
+          const showTitle = getParameterByName("showTitle");
+          const publicationDate = getParameterByName("publicationDate");
+          const template = getParameterByName("template");
+          const playerOptions = {
+            template: "ngpgs-iframe/default",
+            country: "ES",
+            site_section_id: "www.cms-stage-es.ngeo.es",
+            autoplay: "true",
+            id: guid,
+            video_category: tag,
+            channel: channel,
+            pg_rating: showRating,
+            showTitle: showTitle,
+            video_publicationDate: publicationDate
+          };
+          console.log(playerOptions);
+          const player = new window.SDK(
+            `#article-hero-player_1`,
+            playerOptions,
+            [window.SDKHelper.setPlayerUrl, window.SDKHelper.setBrowserData]
+          );
+          player.init(function(encodedData, container, response) {
+            $(container).html(response.payload);
+          });
+          console.log(
+            image,
+            tag,
+            guid,
+            channel,
+            showRating,
+            showTitle,
+            publicationDate
+          );
+        });
+      });
+    </script>
+  </body>
+</html>
