@@ -79,14 +79,15 @@
             video_publicationDate: publicationDate
           };
           console.log(playerOptions);
-          const player = new window.SDK(
+          var ng_player = new window.SDK(
             `#article-hero-player_1`,
             playerOptions,
             [window.SDKHelper.setPlayerUrl, window.SDKHelper.setBrowserData]
           );
-          player.init(function(encodedData, container, response) {
-            if (typeof SDKData.getData(player.instance) === 'undefined') {
-              SDKData.setData(player.instance, playerOptions);
+          ng_player.init(function(encodedData, container, response) {
+            if (typeof SDKData.getData(ng_player.instance) === 'undefined') {
+              SDKData.setData(ng_player.instance, playerOptions);
+              console.log(playerOptions);
             }
             $(container).html(response.payload);
           });
