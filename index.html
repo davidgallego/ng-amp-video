@@ -80,7 +80,7 @@
             playerOptions,
             [window.SDKHelper.setPlayerUrl, window.SDKHelper.setBrowserData]
           );
-          SDKLogger.enabled = true;
+          window.tv.freewheel.SDK.setLogLevel(2);
           ng_player.init(function(encodedData, container, response) {
             if (typeof SDKData.getData(ng_player.instance) === 'undefined') {
               SDKData.setData(ng_player.instance, playerOptions);
