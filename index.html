@@ -85,6 +85,9 @@
             [window.SDKHelper.setPlayerUrl, window.SDKHelper.setBrowserData]
           );
           player.init(function(encodedData, container, response) {
+            if (typeof SDKData.getData(player.instance) === 'undefined') {
+              SDKData.setData(player.instance, playerOptions);
+            }
             $(container).html(response.payload);
           });
         });
