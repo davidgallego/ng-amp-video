@@ -17,10 +17,6 @@
       type="text/javascript"
       src="//mssl.fwmrm.net/libs/adm/6.26.0/AdManager.js"
     ></script>
-  </head>
-
-  <body>
-    <div id="article-hero-player_1" style="height:262px;"></div>
     <script>
       function getParameterByName(name, url) {
         let thisUrl = url;
@@ -55,7 +51,7 @@
       console.log(playerUrl);
       var scriptLoaded = loadScriptAsync(playerUrl);
 
-      document.addEventListener("DOMContentLoaded", function() {
+
         scriptLoaded.then(function() {
           const image = getParameterByName("image");
           const tag = getParameterByName("tag");
@@ -92,7 +88,12 @@
             $(container).html(response.payload);
           });
         });
-      });
     </script>
+  </head>
+  <body>
+    <div>
+    <div id="article-hero-player_1" style="height:262px;"></div>
+  </div>
+
   </body>
 </html>
